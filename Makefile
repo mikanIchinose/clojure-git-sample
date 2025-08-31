@@ -26,7 +26,7 @@ target/mgit-standalone.jar:
 	clojure -T:build uber
 
 .PHONY: native
-native: target/
+native: target/mgit
 
 ifeq ($(UNAME_OS),Darwin)
 GRAAL_BUILD_ARGS += -H:-CheckToolchain
@@ -37,7 +37,7 @@ target/mgit: target/mgit-standalone.jar
 	--features=clj_easy.graal_build_time.InitClojureClasses \
 	--verbose \
 	--no-fallback \
-	-H:-CheckToolchain \
+	$(GRAAL_BUILD_ARGS) \
 	$@
 
 
